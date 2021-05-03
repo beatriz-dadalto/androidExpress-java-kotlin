@@ -1,5 +1,6 @@
 package co.tiagoaguiar.codelab.myapplication;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -35,16 +36,34 @@ public class MainActivity extends AppCompatActivity {
 		rvMain.setLayoutManager(new GridLayoutManager(this, 2));
 
 		MainAdapter adapter = new MainAdapter(mainItens);
+
+		adapter.setListener((id) -> {
+			switch (id) {
+				case 1:
+					startActivity(new Intent(MainActivity.this, ImcActivity.class));
+					break;
+				case 2:
+					startActivity(new Intent(MainActivity.this, TmbActivity.class));
+					break;
+			}
+
+		});
+
 		rvMain.setAdapter(adapter);
 
 	}
 
-	private class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
+	private class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
 		private List<MainItem> mainItems;
+		private OnItemClickListener listener;
 
 		public MainAdapter(List<MainItem> mainItems) {
 			this.mainItems = mainItems;
+		}
+
+		public void setListener(OnItemClickListener listener) {
+			this.listener = listener;
 		}
 
 		@NonNull
@@ -63,23 +82,29 @@ public class MainActivity extends AppCompatActivity {
 		public int getItemCount() {
 			return mainItems.size();
 		}
+
+		// eh a view do item que aparece no recyclerView
+		private class MainViewHolder extends RecyclerView.ViewHolder {
+
+			public MainViewHolder(@NonNull View itemView) {
+				super(itemView);
+			}
+
+			public void bind(MainItem item) {
+				TextView txtName = itemView.findViewById(R.id.item_txt_name);
+				ImageView imgIcon = itemView.findViewById(R.id.item_img_icon);
+				LinearLayout btnImc = (LinearLayout) itemView.findViewById(R.id.btn_imc);
+
+				btnImc.setOnClickListener((view) -> {
+					listener.onCLick(item.getId());
+				});
+
+				txtName.setText(item.getTextStringId());
+				imgIcon.setImageResource(item.getDrawableId());
+				btnImc.setBackgroundColor(item.getColor());
+			}
+		}
 	}
 
-	// eh a view do item que aparece no recyclerView
-	private class MainViewHolder extends RecyclerView.ViewHolder {
 
-		public MainViewHolder(@NonNull View itemView) {
-			super(itemView);
-		}
-
-		public void bind(MainItem item) {
-			TextView txtName = itemView.findViewById(R.id.item_txt_name);
-			ImageView imgIcon = itemView.findViewById(R.id.item_img_icon);
-			LinearLayout container = (LinearLayout) itemView.findViewById(R.id.btn_imc);
-
-			txtName.setText(item.getTextStringId());
-			imgIcon.setImageResource(item.getDrawableId());
-			container.setBackgroundColor(item.getColor());
-		}
-	}
 }
