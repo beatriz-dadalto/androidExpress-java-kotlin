@@ -1,5 +1,0 @@
-Projetos e aprendizados do curso Android Express.
-
-IDE que usei durante as aulas: Android Studio 4.1
-
-https://androiddeveloper.com.br/android/iniciante-express?utm_campaign=AE&utm_source=blog&utm_medium=cursos-tab
