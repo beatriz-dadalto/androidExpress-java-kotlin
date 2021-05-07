@@ -18,6 +18,7 @@
     <string name="imc_severely_high_weight">Severamente obeso</string>
     <string name="imc_extreme_weight">Extremamente obeso</string>
     <string name="imc_response">Imc: %1$.2f</string>
+    <string name="list_response">Imc: %1$.2f | Data: %2$s</string>
     <string name="save">Salvar</string>
     <string name="calc_saved">Registro salvo com sucesso</string>
     <string name="calc_removed">Registro removido com sucesso</string>
