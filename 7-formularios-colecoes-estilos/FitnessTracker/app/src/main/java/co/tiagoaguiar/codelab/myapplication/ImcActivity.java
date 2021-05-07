@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
@@ -54,8 +55,12 @@ public class ImcActivity extends AppCompatActivity {
             new Thread(() -> {
               long calcId = SqlHelper.getInstance(ImcActivity.this).addItem("imc", result);
               runOnUiThread(() -> {
-                if (calcId > 0)
+                if (calcId > 0) {
                   Toast.makeText(ImcActivity.this, R.string.calc_saved, Toast.LENGTH_SHORT).show();
+                  Intent intent = new Intent(ImcActivity.this, ListCalcActivity.class);
+                  intent.putExtra("type", "imc");
+                  startActivity(intent);
+                }
               });
             }).start();
           }))
