@@ -2,6 +2,7 @@ package com.bcoelho.netflixremake;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     for (int i = 0; i < 30; i++) {
       Movie movie = new Movie();
-      movie.setCoverUrl("abc" + i);
+      movie.setCoverUrl(R.drawable.movie);
       movies.add(movie);
     }
 
@@ -38,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private static class MovieHolder extends RecyclerView.ViewHolder {
-    private final TextView textViewUrl;
+
+    private final ImageView imageViewCover;
 
     public MovieHolder(@NonNull View itemView) {
       super(itemView);
-      textViewUrl = itemView.findViewById(R.id.text_view_url);
+      imageViewCover = itemView.findViewById(R.id.image_view_cover);
     }
   }
 
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
       Movie movie = movies.get(position);
-      holder.textViewUrl.setText(movie.getCoverUrl());
+      holder.imageViewCover.setImageResource(movie.getCoverUrl());
     }
 
     @Override
