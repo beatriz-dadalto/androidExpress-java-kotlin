@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     mainAdapter = new MainAdapter(movies);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
     recyclerView.setAdapter(mainAdapter);
   }
 
