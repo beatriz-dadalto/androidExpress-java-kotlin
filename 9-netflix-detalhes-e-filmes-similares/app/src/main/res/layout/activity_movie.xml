@@ -37,7 +37,7 @@
     <ImageView
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/ic_baseline_play_circle_outline_24"
+        android:src="@drawable/play_button"
         app:layout_constraintBottom_toBottomOf="@id/image_view_cover"
         app:layout_constraintEnd_toEndOf="@id/image_view_cover"
         app:layout_constraintStart_toStartOf="@id/image_view_cover"
