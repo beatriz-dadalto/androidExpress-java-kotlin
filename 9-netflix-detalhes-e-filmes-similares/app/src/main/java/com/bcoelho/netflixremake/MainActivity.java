@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bcoelho.netflixremake.model.Category;
 import com.bcoelho.netflixremake.model.Movie;
 import com.bcoelho.netflixremake.utils.CategoryTask;
+import com.bcoelho.netflixremake.utils.ImageDownloaderTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
     @Override
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
       Movie movie = movies.get(position);
-//      holder.imageViewCover.setImageResource(movie.getCoverUrl());
+      new ImageDownloaderTask(holder.imageViewCover).execute(movie.getCoverUrl());
     }
 
     @Override
