@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bcoelho.netflixremake.model.Category;
 import com.bcoelho.netflixremake.model.Movie;
+import com.bcoelho.netflixremake.utils.JsonDownloadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     mainAdapter = new MainAdapter(categories);
     recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
     recyclerView.setAdapter(mainAdapter);
+
+    new JsonDownloadTask(this).execute("https://tiagoaguiar.co/api/netflix/home");
   }
 
   private static class MovieHolder extends RecyclerView.ViewHolder {
