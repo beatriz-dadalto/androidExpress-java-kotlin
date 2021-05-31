@@ -16,6 +16,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,18 +26,21 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class JsonDownloadTask extends AsyncTask<String, Void, List<Category>> {
 
-    private final Context context;
-    ProgressDialog dialog;
+    private final WeakReference<Context> context;
+    private ProgressDialog dialog;
 
     public JsonDownloadTask(Context context) {
-        this.context = context;
+        this.context = new WeakReference<>(context);
     }
 
     // main-thread
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog = ProgressDialog.show(context, "Carregando", "", true);
+        Context context = this.context.get();
+        if (context != null) {
+            dialog = ProgressDialog.show(context, "Carregando", "", true);
+        }
     }
 
     // thread - background
